@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PM Shri KV Aliganj Story Agent AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Story Generator</h1>
+        </header>
+
+        <div class="controls card">
+            <div class="input-group">
+                <label for="topic">Story Topic/Theme:</label>
+                <input type="text" id="topic" placeholder="e.g., A quest for the lost library book, Solving a school mystery, etc.">
+            </div>
+            <button id="generateBtn" class="generate-btn">
+                Generate Story
+            </button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">The AI scribe is weaving your tale...</p>
+        </div>
+
+        <div id="storyOutput" class="story-output card">
+            <center><h3>Welcome!</h3></center>
+            <center><p>Enter An Exciting Topic Above And Click The Button To Generate Story,<br> Magical Story Tailored For KV Aliganj Shift-II Students.</p></center>
+        </div>
+    </div>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>

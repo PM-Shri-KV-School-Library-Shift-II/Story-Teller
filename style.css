@@ -1,0 +1,322 @@
+/* Global Reset and Full Screen Setup */
+:root {
+    /* Advanced Theme Colors */
+    --primary-color: #4a00e0; /* Deep Violet */
+    --secondary-color: #8e2de2; /* Lighter Violet */
+    --background-gradient: linear-gradient(135deg, #f0f4f8, #e0e7f1); /* Subtle light gradient */
+    --text-color: #1a1a2e; /* Dark Navy for contrast */
+    --input-bg: #ffffff;
+    --card-bg: #ffffff;
+    --font-stack: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --shadow-light: 0 6px 15px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --error-color: #dc3545;
+    --success-color: #28a745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    font-family: var(--font-stack);
+    background: var(--background-gradient);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Main Container for Responsiveness and Full View */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 1.0s ease-out;
+}
+
+/* Header Styles */
+header h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: clamp(1.8em, 5vw, 2.5em);
+    padding: 10px 0;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Card Styles */
+.card {
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover:not(.loading) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Input/Control Panel Styles */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.controls input[type="text"] {
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    background-color: var(--input-bg);
+    transition: all 0.3s ease;
+}
+
+.controls input[type="text"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(142, 45, 226, 0.2);
+    outline: none;
+}
+
+/* Button Styles */
+.generate-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 16px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(74, 0, 224, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.generate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(74, 0, 224, 0.5);
+}
+
+.generate-btn:disabled {
+    background: #ccc;
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Story Display Area */
+.story-output {
+    overflow-y: auto;
+    max-height: 70vh;
+    line-height: 1.7;
+}
+
+/* Custom Markdown Styling */
+.story-content h1 {
+    color: var(--primary-color);
+    font-size: clamp(1.8em, 4vw, 2.5em);
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    animation: slideInDown 0.5s ease-out;
+}
+
+.story-content h4 {
+    color: var(--secondary-color);
+    font-size: clamp(1.2em, 3vw, 1.4em);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.story-content p {
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+    text-align: justify;
+}
+
+.story-content ul {
+    list-style-type: none;
+    padding-left: 20px;
+    margin-bottom: 1.5em;
+}
+
+.story-content ul li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.story-content ul li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Loading Animation */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.loading.active {
+    display: block;
+}
+
+.spinner {
+    border: 4px solid rgba(74, 0, 224, 0.1);
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.loading-text {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    animation: pulse 1.8s infinite ease-in-out;
+}
+
+/* Error and Alert Styles */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffecb5;
+    color: #856404;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: var(--error-color);
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .container {
+        padding: 25px;
+    }
+    
+    .controls {
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 20px;
+    }
+    
+    .input-group {
+        flex: 1;
+    }
+    
+    .generate-btn {
+        width: auto;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .generate-btn {
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    
+    .story-output {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    
+    .controls input[type="text"] {
+        padding: 12px;
+        font-size: 15px;
+    }
+    
+    .story-content p {
+        font-size: 1em;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .controls,
+    .loading,
+    .generate-btn {
+        display: none !important;
+    }
+    
+    .story-output {
+        max-height: none;
+        overflow: visible;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
